@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main(){
+	string chars {"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-=_+`~,./<>?;':{}[]"};
+	string key {"QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm ?></.,';:][}{=-+_`~1234567890)(*&^%$#@!"};
+	
+	string userMessage{};
+	string encryptedMessage{};
+	
+	cout << "Enter a Message to be Encrypted:" << endl;
+	
+	getline(cin, userMessage);
+	
+	if (chars.length() == key.length()){
+		for (char c: userMessage){
+			size_t position{chars.find(c)};
+			if (position != string::npos){
+				char newChar{key.at(position)};
+				encryptedMessage += newChar;
+			}else{
+				encryptedMessage += c;
+			}
+		}
+
+		cout << encryptedMessage << endl;
+	
+		cout << "Enter an Encrypted Message to Decipher:" << endl;
+	
+		string decryptedMessage{};
+		string userMessage2{};
+	
+		getline(cin, userMessage2);
+		
+		for (char d: userMessage2){
+			size_t position{key.find(d)};
+			if (position != string::npos){
+				char newChar{chars.at(position)};
+				decryptedMessage += newChar;
+			}else{
+				decryptedMessage += d;
+			}
+		}
+		
+		cout << decryptedMessage << endl;
+		
+		cout << "Thanks, Goodbye" << endl;
+			
+	}else{
+		cout << "There is a program error - contact the developer" << endl;
+	}
+}
